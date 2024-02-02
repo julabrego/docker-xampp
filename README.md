@@ -103,3 +103,12 @@ If you need another version, you can easily build a Docker image yourself, here'
 1. Clone this repo (local clone is sufficient, no need to fork)
 2. Find the URL to a URL to your desired version. List of versions can be found here: https://sourceforge.net/projects/xampp/files/XAMPP%20Linux/
 3. Build the image using e.g. `docker build --build-arg XAMPP_URL="https://www.apachefriends.org/xampp-files/5.6.40/xampp-linux-x64-5.6.40-1-installer.run?from_af=true" .`
+
+## To use this repository locally:
+
+1. Clone this repo
+2. If you want to use custom apache configuration create a folder called `my_apache_conf` and put the .conf files inside it
+3. If you want to synchronize your sites create a folder called `my_web_pages`
+4. Execute the next command (remove the -v parameters if you don't want to include the previous items)
+5. `docker build --build-arg XAMPP_URL="https://sourceforge.net/projects/xampp/files/XAMPP%20Linux/7.4.33/xampp-linux-x64-7.4.33-0-installer.run/download" -t my_xampp/latest .`
+6. `docker run -it --rm -p 41061:22 -p 41062:80 -d -v ./my_web_pages:/www  -v ./my_apache_conf:/opt/lampp/apache2/conf.d --name my_xampp my_xampp`
